@@ -1,0 +1,2 @@
+# github.com/jung-kurt/gofpdf v1.16.2
+## explicit; go 1.12
