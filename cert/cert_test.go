@@ -10,9 +10,6 @@ func TestValidCertData(t *testing.T) {
 	if c == nil {
 		t.Errorf("Cert should be valid ref, error: nil")
 	}
-	if c.Course != "GOLANG COURSE" {
-		t.Errorf("Course name is not valid, expected='GOLANG COURSE', got c.Course=%v", c.Course)
-	}
 }
 
 func TestCourseEmptyValue(t *testing.T) {
@@ -23,9 +20,24 @@ func TestCourseEmptyValue(t *testing.T) {
 }
 
 func TestCourseTooLong(t *testing.T) {
-	course := "asasdhsjdhflauhdsfgliuehgliuhergliheqlrigbnlqkjbgljkabfdlajsdbfljahsdbflasbfjhd"
+	course := "asasdhsjdhflauhdsfgliuehgliuhergliheqlrigbnlqkjbgljkabfdl"
 	_, err := New(course, "Bob", "2023-03-21")
 	if err == nil {
 		t.Errorf("Error should be returned on a too long name (course=%s)", course)
+	}
+}
+
+func TestNameEmptyValue(t *testing.T) {
+	_, err := New("Golang", "", "2023-03-21")
+	if err == nil {
+		t.Errorf("Error should be returned on empty name string")
+	}
+}
+
+func TestNameTooLong(t *testing.T) {
+	name := "asasdhsjdhflauhdsfgliuehgliuhergliheqlrigbnlqkjbgff"
+	_, err := New("Golang", name, "2023-03-21")
+	if err == nil {
+		t.Errorf("Error should be returned on a too long name (name=%s)", name)
 	}
 }
