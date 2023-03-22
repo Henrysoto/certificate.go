@@ -54,6 +54,9 @@ func (p *PdfSaver) Save(c cert.Cert) error {
 	pdf.SetFont("Helvetica", "I", 15)
 	pdf.WriteAligned(0, 105, c.LabelDate, "C")
 
+	// Footer
+	setFooter(pdf)
+
 	// save pdf file
 	filename := fmt.Sprintf("%v.pdf", c.LabelTitle)
 	path := path.Join(p.OutputDir, filename)
@@ -105,4 +108,21 @@ func setHeader(pdf *gofpdf.Fpdf, c *cert.Cert) {
 
 	pdf.SetFont("Arial", "", 37)
 	pdf.WriteAligned(0, 85, c.LabelCompletion, "C")
+}
+
+func setFooter(pdf *gofpdf.Fpdf) {
+	opts := gofpdf.ImageOptions{
+		ImageType: "png",
+	}
+
+	margin := -180.0
+	x := 0.0
+	imageWidth := 50.0
+	filename := "assets/img/stamp.png"
+	pdf.ImageOptions(
+		filename,
+		x-margin, 127,
+		imageWidth, 0,
+		false, opts, 0, "",
+	)
 }
