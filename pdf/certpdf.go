@@ -115,13 +115,14 @@ func setFooter(pdf *gofpdf.Fpdf) {
 		ImageType: "png",
 	}
 
-	margin := -180.0
-	x := 0.0
+	pW, pH := pdf.GetPageSize()
 	imageWidth := 50.0
+	x := pW - imageWidth - 60.0
+	y := pH - imageWidth - 33.0
 	filename := "assets/img/stamp.png"
 	pdf.ImageOptions(
 		filename,
-		x-margin, 127,
+		x, y,
 		imageWidth, 0,
 		false, opts, 0, "",
 	)
