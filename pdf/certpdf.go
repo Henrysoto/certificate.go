@@ -64,7 +64,7 @@ func (p *PdfSaver) Save(c cert.Cert) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Saved certificate to '%v'", path)
+	fmt.Printf("Saved certificate to '%v'\n", path)
 	return nil
 }
 
